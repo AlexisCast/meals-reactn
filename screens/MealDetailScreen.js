@@ -1,6 +1,8 @@
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { MEALS } from "../data/dummy-data";
 
+import MealDetails from "../components/MealDetails";
+
 const MealDetailScreen = ({ route }) => {
 	const mealId = route.params.mealId;
 
@@ -8,7 +10,21 @@ const MealDetailScreen = ({ route }) => {
 
 	return (
 		<View>
-			<Text>This is the Meal Detail Screen {mealId}</Text>
+			<Image source={{ uri: selectedMeal.imageUrl }} />
+			<Text>{selectedMeal.title}</Text>
+			<MealDetails
+				duration={selectedMeal.duration}
+				complexity={selectedMeal.complexity}
+				affordability={selectedMeal.affordability}
+			/>
+			<Text>Ingredients</Text>
+			{selectedMeal.ingredients.map((ingredient) => (
+				<Text key={ingredient}>{ingredient}</Text>
+			))}
+			<Text>Steps</Text>
+			{selectedMeal.steps.map((step) => (
+				<Text key={step}>{step}</Text>
+			))}
 		</View>
 	);
 };
